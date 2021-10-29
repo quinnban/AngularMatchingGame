@@ -20,10 +20,10 @@ export class GameTileComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(){
     this.gameService.moveSubject.subscribe(move => {
       if(move?.index === this.index){
-        console.log(move);
         this.renderer.addClass(this._element.nativeElement,move.move);
         setTimeout(() => {
           this.renderer.removeClass(this._element.nativeElement,move.move);
+          this.index = move.newIndex !==null ? move.newIndex : move.index;
         },1000);
       }
     });

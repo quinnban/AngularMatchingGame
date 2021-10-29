@@ -38,8 +38,8 @@ export class GameServiceService {
       const pos2 = this.calculatePosistion(this.secondTile);
       console.log(pos1,pos2);
       if(this.moveIsValid(pos1,pos2)){
-         this.pickAnimation(pos1,pos2,this.firstTile);
-         this.pickAnimation(pos2,pos1,this.secondTile);
+         this.pickAnimation(pos1,pos2,this.firstTile,this.secondTile);
+         this.pickAnimation(pos2,pos1,this.secondTile,this.firstTile);
          this.moveTiles(this.firstTile,this.secondTile);
       }
       this.clearTiles()
@@ -52,7 +52,7 @@ export class GameServiceService {
      this.currentTile.next(index);
    }
 
-   private pickAnimation(pos1: Position, pos2: Position, index:number): void {
+   private pickAnimation(pos1: Position, pos2: Position, index:number,newIndex:number): void {
      let move = ''
     if(pos1.x < pos2.x){
       move='moveLeft';
@@ -66,7 +66,7 @@ export class GameServiceService {
     if(pos1.y > pos2.y){
       move= 'moveUp'
     }
-    this.moveSubject.next({index:index,move:move});
+    this.moveSubject.next({index:index,move:move,newIndex:newIndex});
    }
 
    private calculatePosistion(index: number):Position{
@@ -109,8 +109,8 @@ export class GameServiceService {
 
 
     const move = "invalidMove";
-    this.moveSubject.next({index:this.firstTile,move:move});
-    this.moveSubject.next({index:this.secondTile,move:move});
+    this.moveSubject.next({index:this.firstTile,move:move,newIndex:null});
+    this.moveSubject.next({index:this.secondTile,move:move,newIndex:null});
     return false;
 
    }
