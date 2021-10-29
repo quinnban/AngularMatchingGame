@@ -1,0 +1,95 @@
+/* You can add global styles to this file, and also import other style files */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+
+.moveUp{
+  animation-duration: 1s;
+  animation-name: moveTileUp;
+}
+
+.moveDown{
+  animation-duration: 1s;
+  animation-name: moveTileDown;
+}
+
+.moveLeft{
+  animation-duration: 1s;
+  animation-name: moveTileLeft;
+}
+
+.moveRight{
+  animation-duration: 1s;
+  animation-name: moveTileRight;
+}
+
+.invalidMove{
+  animation-duration: 1s;
+  animation-name:invalidMove;
+}
+
+
+
+@keyframes moveTileLeft{
+  from {
+    transform: translateX(0%);
+  }
+
+  to {
+    transform: translateX(150%);
+  }
+}
+
+@keyframes moveTileRight{
+  from {
+    transform: translateX(0%);
+  }
+
+  to {
+    transform: translateX(-150%);
+  }
+}
+
+
+@keyframes moveTileUp{
+  from {
+    transform: translateY(0%);
+  }
+
+  to {
+    transform: translateY(-150%);
+  }
+}
+
+@keyframes moveTileDown{
+  from {
+    transform: translateY(0%);
+  }
+
+  to {
+    transform: translateY(150%);
+  }
+}
+
+@keyframes invalidMove{
+  0% {
+    transform: translateX(25%);
+  }
+
+  25%{
+    transform: translateX(0%);
+  }
+
+  50%{
+    transform: translateX(-25%);
+  }
+
+  75%{
+    transform: translateX(25%);
+  }
+
+  100% {
+    transform: translateX(0%);
+  }
+}
