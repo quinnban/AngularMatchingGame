@@ -34,7 +34,7 @@ export class GameBoardComponent implements OnInit,AfterViewInit {
     for(let i = 0; i < 64; i ++){
       const ref = this.gameBoard.createComponent(this.componentFactoryResolver.resolveComponentFactory(GameTileComponent));
       ref.instance.setIndex = i;
-      ref.instance.setAsset = Math.floor(Math.random()*3)
+      ref.instance.setAsset = Math.floor(Math.random()*6)
     }
 
   }
