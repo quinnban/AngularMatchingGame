@@ -18,14 +18,25 @@ export class GameBoardComponent implements OnInit,AfterViewInit {
     this.gameService.currentTile.subscribe(tile => {
       console.log(tile);
     })
+    this.gameService.boardChange.subscribe(tiles => {
+      if(!tiles){
+        return;
+      }
+      const ref1 = this.gameBoard.get(tiles.index1);
+      const ref2 = this.gameBoard.get(tiles.index2);
+      this.gameBoard.move(ref1,tiles.index2); 
+      this.gameBoard.move(ref2,tiles.index1);
+    });
   }
 
   ngAfterViewInit(): void {
     console.log(this.gameTiles.length);
-    for(let i = 0; i < 80; i ++){
+    for(let i = 0; i < 64; i ++){
       const ref = this.gameBoard.createComponent(this.componentFactoryResolver.resolveComponentFactory(GameTileComponent));
       ref.instance.setIndex = i;
+      ref.instance.setAsset = Math.floor(Math.random()*3)
     }
+
   }
 
   // test(i: number,j: number):void {

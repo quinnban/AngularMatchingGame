@@ -1,3 +1,5 @@
 <div class="border rounded border-green-600 h-full" (click)="onClick()">
-  Asset
+ <app-face-one *ngIf="asset === 0"></app-face-one>
+ <app-face-two *ngIf="asset === 1"></app-face-two>
+ <app-face-three *ngIf="asset === 2"></app-face-three>
 </div>

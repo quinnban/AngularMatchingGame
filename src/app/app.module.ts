@@ -5,12 +5,18 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { GameTileComponent } from './game-tile/game-tile.component';
 import { GameBoardComponent } from './game-board/game-board.component';
+import { FaceOneComponent } from './asset-componets/face-one/face-one.component';
+import { FaceTwoComponent } from './asset-componets/face-two/face-two.component';
+import { FaceThreeComponent } from './asset-componets/face-three/face-three.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     GameTileComponent,
-    GameBoardComponent
+    GameBoardComponent,
+    FaceOneComponent,
+    FaceTwoComponent,
+    FaceThreeComponent
   ],
   imports: [
     BrowserModule,

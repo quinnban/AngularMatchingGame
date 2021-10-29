@@ -1,6 +1,7 @@
 import { ComponentRef, Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { GameTileComponent } from './game-tile/game-tile.component';
+import { BoardChange } from './models/boardChange.model';
 import { Position } from './models/position.model';
 import { TileMove } from './models/tileMove.model';
 
@@ -10,6 +11,7 @@ import { TileMove } from './models/tileMove.model';
 export class GameServiceService {
 
   private gameBoard: GameTileComponent[] = [];
+  boardChange: BehaviorSubject<BoardChange> = new BehaviorSubject(null);
   moveSubject: BehaviorSubject<TileMove> = new BehaviorSubject(null);
   currentTile:BehaviorSubject<number> = new BehaviorSubject(null);
   private firstTile:number = -1;
@@ -19,8 +21,11 @@ export class GameServiceService {
 
    }
 
-   private moveTiles(): void{
-     this.gameBoard[this.firstTile] = this.gameBoard.splice(this.secondTile,1,this.gameBoard[this.firstTile])[0];
+   private moveTiles(index1: number, index2: number): void{
+     this.gameBoard[index1] = this.gameBoard.splice(index2,1,this.gameBoard[index1])[0];
+     setTimeout(() => {
+      this.boardChange.next({index1:index1,index2:index2});
+    },1000);
    }
 
    addTile(tile: GameTileComponent): void{
@@ -35,7 +40,7 @@ export class GameServiceService {
       if(this.moveIsValid(pos1,pos2)){
          this.pickAnimation(pos1,pos2,this.firstTile);
          this.pickAnimation(pos2,pos1,this.secondTile);
-         this.moveTiles();
+         this.moveTiles(this.firstTile,this.secondTile);
       }
       this.clearTiles()
       return;

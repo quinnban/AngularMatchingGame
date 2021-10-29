@@ -1,4 +1,4 @@
-import { Component, OnInit,ElementRef,Renderer2, AfterViewInit } from '@angular/core';
+import { Component, OnInit,ElementRef,Renderer2, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { GameServiceService } from '../game-service.service';
 
 @Component({
@@ -9,8 +9,9 @@ import { GameServiceService } from '../game-service.service';
 export class GameTileComponent implements OnInit, AfterViewInit {
 
   index: number;
+  asset: number = -1;
 
-  constructor(private gameService: GameServiceService, private _element:ElementRef,private renderer: Renderer2 ) { }
+  constructor(private gameService: GameServiceService, private _element:ElementRef,private renderer: Renderer2,private ref: ChangeDetectorRef ) { }
 
   ngOnInit(): void {
     this.gameService.addTile(this);
@@ -33,5 +34,11 @@ export class GameTileComponent implements OnInit, AfterViewInit {
   }
   set setIndex(index: number){
     this.index = index;
+    this.ref.detectChanges();
+  }
+
+  set setAsset(asset: number){
+    this.asset = asset;
+    this.ref.detectChanges();
   }
 }
